@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <!-- Syntax highlighting via Prism, note: restricted langs -->
+<link rel="stylesheet" href="/libs/highlight/github.min.css">
+ 
+  <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/infra/logoF_square.gif">
+   <title>RSS, Sitemap and Robots</title> 
+
+  <!-- LUNR -->
+  <script src="/libs/lunr/lunr.min.js"></script>
+  <script src="/libs/lunr/lunr_index.js"></script>
+  <script src="/libs/lunr/lunrclient.min.js"></script>
+
+  <!-- PLOTLY -->
+  
+
+</head>
+
+<body> <!-- closed in foot.html -->
+  <div class="page-wrap"> <!-- closed in foot.html -->
+    <!-- SIDE BAR -->
+    <div class="side-bar">
+      <div class="header">
+        <a href="/" class="title">
+          <img style="height:60px;" src="/assets/infra/franklin.svg" alt="franklin" />
+          <style>
+            @media (max-width: 31.25rem) {
+              .side-bar .show-menu {
+                height: 30px;
+              }
+            }
+
+            @media (max-width: 50rem) {
+              .side-bar .header .title {
+                padding-top: 0;
+                padding-bottom: 0;
+              }
+
+              .header .title img {
+                height: 60px;
+                max-width: 100px !important;
+              }
+            }
+
+            @media (min-width: 66.5rem) {
+              .header .title img {
+                max-width: 140px !important;
+              }
+            }
+          </style>
+        </a>
+      </div>
+      <label for="show-menu" class="show-menu">MENU</label>
+      <input type="checkbox" id="show-menu" role="button">
+      <div class="menu" id="side-menu">
+        <ul class="menu-list">
+          <!-- HOME -->
+          <li class="menu-list-item "><a href="/" class="menu-list-link">• Home</a>
+            <!-- WORKFLOW -->
+          <li class="menu-list-parent active"><a href="/workflow/" class="menu-list-link">•
+              Workflow</a>
+            <ul class="menu-list-child-list ">
+              <li class="menu-list-item "><a href="/workflow/"
+                  class="menu-list-link">Create and edit</a>
+              <li class="menu-list-item "><a href="/workflow/structure/"
+                  class="menu-list-link">Page structure</a>
+              <li class="menu-list-item "><a href="/workflow/deploy/"
+                  class="menu-list-link">Deploy</a>
+              <li class="menu-list-item active"><a href="/workflow/sitemap-rss/"
+                  class="menu-list-link">Sitemap and RSS</a>
+            </ul>
+            <!-- SYNTAX -->
+            <!-- NOTE: if adding a menu item, add ref to first item! -->
+          <li class="menu-list-parent "><a href="/syntax/markdown/"
+              class="menu-list-link">• Syntax</a>
+            <ul class="menu-list-child-list ">
+              <li class="menu-list-item "><a href="/syntax/markdown/"
+                  class="menu-list-link">Markdown</a>
+              <li class="menu-list-item "><a href="/syntax/divs-commands/"
+                  class="menu-list-link">Divs and Commands</a>
+              <li class="menu-list-item "><a href="/syntax/page-variables/"
+                  class="menu-list-link">Page Variables</a>
+              <li class="menu-list-item "><a href="/syntax/rss/"
+                  class="menu-list-link">RSS</a>
+              <li class="menu-list-item "><a href="/syntax/utils/"
+                  class="menu-list-link">Utils</a>
+            </ul>
+            <!-- STYLING -->
+          <li class="menu-list-parent "><a href="/styling/templates/"
+              class="menu-list-link">• Styling</a>
+            <ul class="menu-list-child-list ">
+              <li class="menu-list-item "><a href="/styling/templates/"
+                  class="menu-list-link">Templates</a>
+              <li class="menu-list-item "><a href="/styling/classes/"
+                  class="menu-list-link">Classes</a>
+            </ul>
+            <!-- CODE -->
+          <li class="menu-list-parent "><a href="/code/" class="menu-list-link">• Code</a>
+            <ul class="menu-list-child-list ">
+              <li class="menu-list-item "><a href="/code/"
+                  class="menu-list-link">Inserting code</a>
+              <li class="menu-list-item "><a href="/code/eval-tricks/"
+                  class="menu-list-link">Code tricks</a>
+              <li class="menu-list-item "><a href="/code/literate/"
+                  class="menu-list-link">Literate.jl</a>
+            </ul>
+            <!-- EXTRAs -->
+          <li class="menu-list-parent "><a href="/extras/" class="menu-list-link">•
+              Extras</a>
+            <ul class="menu-list-child-list ">
+              <li class="menu-list-item "><a href="/extras/"
+                  class="menu-list-link">Overview</a>
+              <li class="menu-list-item "><a href="/extras/lunr/"
+                  class="menu-list-link">Search with Lunr</a>
+              <li class="menu-list-item "><a href="/extras/utterances/"
+                  class="menu-list-link">Comments with Utterances</a>
+              <li class="menu-list-item "><a href="/extras/literate/"
+                  class="menu-list-link">Literate</a>
+              <li class="menu-list-item "><a href="/extras/plotly/"
+                  class="menu-list-link">Plotly</a>
+            </ul>
+            <!-- FAQ -->
+          <li class="menu-list-parent "><a href="/faq/technical/" class="menu-list-link">•
+              FAQ</a>
+            <ul class="menu-list-child-list ">
+              <li class="menu-list-item "><a href="/faq/technical/"
+                  class="menu-list-link">Technical</a>
+              <li class="menu-list-item "><a href="/faq/troubleshooting/"
+                  class="menu-list-link">Troubleshooting</a>
+              <li class="menu-list-item "><a href="/faq/why-o-why/"
+                  class="menu-list-link">Meta</a>
+            </ul>
+        </ul>
+
+        <!-- Search Bar -->
+        <form id="lunrSearchForm" name="lunrSearchForm" class="search-container">
+          <input class="search-input" name="q" placeholder="Enter search term" type="text">
+          <input class="search-button" type="submit" value=" " formaction="/search/index.html">
+        </form>
+
+      </div>
+      <div class="footer">
+        <a href="/faq/why-o-why/"><img style="width:40%;padding-left:10px;margin-bottom:15px;"
+            src="/assets/infra/logoF2.svg" alt="Franklin Logo" /></a>
+      </div>
+    </div>
+    <!-- CONTENT -->
+    <div class="main-content-wrap"> <!-- closed in foot.html -->
+      <div class="main-content" id="focus" tabindex="-1" style="outline:0;"> <!-- closed in foot.html -->
+        <div class="main-header">
+          <a name="pagetop"></a>
+
+          <a id="github" href="https://github.com/tlienart/Franklin.jl/blob/master/docs/workflow/sitemap-rss.md">Page source</a>
+          <span style="width:30px; text-align: center;color:lightgray;">|</span>
+          <a id="github" href="https://github.com/tlienart/Franklin.jl">GitHub Repository</a>
+        </div>
+
+        <!-- Content appended here (in class franklin-content) --><div class="franklin-content"><h1 id="rss_sitemap_and_robots"><a href="#rss_sitemap_and_robots" class="header-anchor">RSS, Sitemap and Robots</a></h1>
+<div class="franklin-toc"><ol><li><a href="#sitemap">Sitemap</a></li><li><a href="#rss">RSS</a></li><li><a href="#robots">Robots</a></li></ol></div>
+<h2 id="sitemap"><a href="#sitemap" class="header-anchor">Sitemap</a></h2>
+<p>Franklin automatically generates a <a href="https://www.sitemaps.org/protocol.html">sitemap</a> for your website which you can adjust as required. By default, the sitemap will have an entry for every page on your website, with a default priority of <code>0.5</code> and a change frequency set to <code>monthly</code>.</p>
+<p>For a given <em>markdown</em> page &#40;extension <code>.md</code>&#41; you can change this by setting the following <a href="/syntax/page-variables/">page variables</a>:</p>
+<div class="tlist"><ul>
+<li><p><code>sitemap_exclude</code>: set it to <code>false</code> to remove the page from the sitemap,</p>
+</li>
+<li><p><code>sitemap_changefreq</code>: the change frequency, it can be one of <code>&#91;&quot;always&quot;, &quot;hourly&quot;, &quot;daily&quot;, &quot;weekly&quot;, &quot;monthly&quot;, &quot;yearly&quot;, &quot;never&quot;&#93;</code>,</p>
+</li>
+<li><p><code>sitemap_priority</code>: the relative priority of the page compared to other pages &#40;a value between <code>0</code> and <code>1</code>&#41;.</p>
+</li>
+</ul></div>
+<p>So for instance you could have in your markdown:</p>
+<pre><code class="language-plaintext">&#43;&#43;&#43;
+sitemap_changefreq &#61; &quot;yearly&quot;
+sitemap_priority &#61; 0.2
+&#43;&#43;&#43;</code></pre>
+<p>For a given <em>html</em> page &#40;extension <code>.html</code>&#41; you can also specify these options using the <a href="/utils/#html_functions_hfun_"><code>hfun</code></a> <code>sitemap_opts</code>:</p>
+<pre><code class="language-plaintext">&#123;&#123;sitemap_opts yearly 0.2&#125;&#125;</code></pre>
+<p>or to exclude the page from the sitemap</p>
+<pre><code class="language-plaintext">&#123;&#123;sitemap_opts exclude&#125;&#125;</code></pre>
+<p>Note that you can also disable the sitemap generation completely by setting the global page variable <code>generate_sitemap</code> to <code>false</code> in your <code>config.md</code>.</p>
+<h2 id="rss"><a href="#rss" class="header-anchor">RSS</a></h2>
+<p>Franklin supports generating an <a href="https://validator.w3.org/feed/docs/rss2.html">RSS feed</a> for your website which you can adjust at will. This is only supported for pages with a <em>markdown</em> source for now and you must define the <code>rss</code> or <code>rss_description</code> page variable which will contain the short description corresponding to the RSS entry for instance:</p>
+<pre><code class="language-plaintext">@def rss &#61; &quot;This page is about XXX and YYY.&quot;</code></pre>
+<p>Click <a href="/syntax/rss">here</a> for more details on the page variables related to the RSS feed.</p>
+<p>Note that you can also disable the rss generation completely by setting the global page variable <code>generate_rss</code> to <code>false</code> in your <code>config.md</code>.</p>
+<h2 id="robots"><a href="#robots" class="header-anchor">Robots</a></h2>
+<p>Franklin automatically generates a <a href="https://www.robotstxt.org/">robots.txt</a> file for your website which you can adjust as required. By default, the file will contain a link to your sitemap, if one is generated, and no page will be disallowed to robots.</p>
+<p>For a given <em>markdown</em> page &#40;extension <code>.md</code>&#41; you can disallow it by setting the <a href="/syntax/page-variables/">page variable</a> <code>robots_disallow_this_page</code> to <code>true</code>, you could have in your markdown:</p>
+<pre><code class="language-plaintext">@def robots_disallow_this_page &#61; true</code></pre>
+<p>You can also disallow folders by setting the global variable <code>robots_disallow</code> to a vector of folders like <code>&#91;&quot;folder1/&quot;, &quot;folder2/&quot;&#93;</code> in your <code>config.md</code>. To disallow the whole website, you can set <code>robots_disallow &#61; &#91;&quot;/&quot;&#93;</code>.</p>
+<p>Note that you can disable the generation of the <code>robots.txt</code> file by setting the global variable <code>generate_robots</code> to <code>false</code> in your <code>config.md</code>.</p>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Thibaut Lienart. Last modified: April 15, 2024. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+    
+    
+      <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>
